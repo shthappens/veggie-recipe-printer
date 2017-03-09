@@ -40,11 +40,7 @@ recipe = {
 #   puts "#{i + 1}. #{direction}"
 # end
 
-
-
 recipe_title = "Recipe: #{recipe[:name]}"
-recipe_ingredients = recipe[:ingredients]
-recipe_directions = recipe[:directions]
 
 recipe_template = <<-ERB
 
