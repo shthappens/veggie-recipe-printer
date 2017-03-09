@@ -23,37 +23,48 @@ recipe = {
   ]
 }
 
-puts "#==================================#\n"
-puts "# Recipe: #{recipe[:name]} #\n"
-puts "#==================================#\n"
-puts ""
-puts "Ingredients\n"
-puts "-----------\n"
-puts ""
-puts recipe[:ingredients]
-puts ""
-puts "Directions\n"
-puts "----------"
-puts ""
-
-recipe[:directions].each_with_index do |direction, i|
-  puts "#{i + 1}. #{direction}"
-end
-
-
-
-# recipe_title = "Recipe: #{recipe[:name]}"
-
-# recipe_template = <<-ERB
+# puts "#==================================#\n"
+# puts "# Recipe: #{recipe[:name]} #\n"
+# puts "#==================================#\n"
+# puts ""
+# puts "Ingredients\n"
+# puts "-----------\n"
+# puts ""
+# puts recipe[:ingredients]
+# puts ""
+# puts "Directions\n"
+# puts "----------"
+# puts ""
 #
-# #=<%= "=" * recipe_title.length %>=#
-# # <%= recipe_title %> #
-# #=<%= "=" * recipe_title.length %>=#
-#
-# Ingredients
-# -----------
-#
-# ERB
-#
-# erb = ERB.new(recipe_template)
-# puts erb.result
+# recipe[:directions].each_with_index do |direction, i|
+#   puts "#{i + 1}. #{direction}"
+# end
+
+
+
+recipe_title = "Recipe: #{recipe[:name]}"
+recipe_ingredients = recipe[:ingredients]
+recipe_directions = recipe[:directions]
+
+recipe_template = <<-ERB
+
+#=<%= "=" * recipe_title.length %>=#
+# <%= recipe_title %> #
+#=<%= "=" * recipe_title.length %>=#
+
+Ingredients
+-----------
+<% recipe[:ingredients].each do |ingredient| %>
+  <%= ingredient %>
+<% end %>
+
+Directions
+----------
+<% recipe[:directions].each_with_index do |direction, index| %>
+  <%= index + 1 %>. <%= direction %>
+<% end %>
+
+ERB
+
+erb = ERB.new(recipe_template)
+puts erb.result
